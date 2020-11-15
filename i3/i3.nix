@@ -99,6 +99,7 @@ let colors = import ../colors.nix; in
       # Todo: make it look good
       # Use global color variables
       bars = [{
+        fonts = [ "Sourcecodepro 8" ];
         statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
         colors = {
           background = colors.primary.background;
@@ -162,7 +163,8 @@ let colors = import ../colors.nix; in
 
           "${modifier}+minus" = "scratchpad show";
           "${modifier}+Shift+minus" = "move scratchpad";
-          "${modifier}+Shift+e" = "mode \"$lock\"";
+          "${modifier}+Shift+e" = "mode \"$lock_launcher\"";
+          "${modifier}+Shift+f" = "mode \"$firefox_launcher\"";
 
           "${modifier}+Shift+t" = "[class=\"^Alacritty$\"] scratchpad show";
 
@@ -178,14 +180,23 @@ let colors = import ../colors.nix; in
           };
         }
       ];
-
     };
-
 
     extraConfig = ''
 
-set $lock System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
-mode "$lock" {
+set $firefox_launcher Firefox (d) dghaehre, (w) work, (o) omni
+mode "$firefox_launcher" {
+  bindsym d exec --no-startup-id firefox --args -P dghaehre, mode "default"
+  bindsym w exec --no-startup-id firefox --args -P work, mode "default"
+  bindsym o exec --no-startup-id firefox --args -P omni, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+set $lock_launcher System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$lock_launcher" {
     bindsym l exec --no-startup-id i3lock -c ${colors.primary.background}, mode "default"
     bindsym e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
     bindsym s exec --no-startup-id "i3lock -c ${colors.primary.background} && systemctl suspend", mode "default"
@@ -195,6 +206,7 @@ mode "$lock" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
     '';
   };
 

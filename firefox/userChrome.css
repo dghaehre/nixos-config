@@ -1,12 +1,4 @@
-:root {
-  --uc-urlbar-bg-color: #2E3440;
-  --uc-show-new-tab-button: none;
-  --uc-show-tab-separators: none;
-  --uc-tab-separators-color: none;
-  --uc-tab-separators-width: none;
-}
-#titlebar {
-	-moz-box-ordinal-group: 2 !important;
+#titlebar { -moz-box-ordinal-group: 2 !important;
 }	
 .titlebar-buttonbox-container {
 	display: none !important;
@@ -30,8 +22,11 @@
 }
 #urlbar-background, .titlebar-buttonbox-container, #nav-bar, .tabbrowser-tab:not([selected]) .tab-background{
 	background: none !important;
-    background-color: var(--uc-urlbar-bg-color) !important;
+        background-color: var(--uc-urlbar-bg-color) !important;
 	border: none !important;
+}
+.tabbrowser-tab[selected="true"], .tab-background[selected="true"] {
+        background-color: var(--uc-urlbar-selected-bg-color) !important;
 }
 #urlbar[breakout][breakout-extend] {
     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;

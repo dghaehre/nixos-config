@@ -28,6 +28,11 @@ let colors = import ./colors.nix; in
   };
 
   services.clipmenu.enable = true;
+  # Possible redundant
+  services.screen-locker = {
+    enable = true;
+    lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+  };
   services.unclutter = {
     enable = true;
     timeout = 4;
