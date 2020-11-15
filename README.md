@@ -1,0 +1,3 @@
+# My nixos config
+
+wip
