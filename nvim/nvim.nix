@@ -22,11 +22,12 @@
 	coc-nvim
 	vim-tsx
 	vim-elixir
-	# vim-nnn Exists in unstable:
+	# vim-nnn Exists in unstable
 	vim-commentary
 	vim-surround
 	vim-nix
 	vim-startify
+        vim-css-color
     ];
     extraPackages = with pkgs; [
       fzf
