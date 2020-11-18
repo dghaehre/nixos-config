@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+# Inspo: https://cmacr.ae/post/2020-05-09-managing-firefox-on-macos-with-nix/
 
 let colors = import ../colors.nix; in
 {
@@ -9,8 +10,6 @@ let colors = import ../colors.nix; in
     };
   };
 
-  # https://cmacr.ae/post/2020-05-09-managing-firefox-on-macos-with-nix/
-  # TODO: see a difference between work and personal..
   programs.firefox = {
     enable = true;
     profiles =
@@ -36,6 +35,7 @@ let colors = import ../colors.nix; in
         "services.sync.engine.prefs" = false;
       };
       in {
+
       dghaehre = {
 	id = 0;
         settings = defaultSettings // {
@@ -55,48 +55,15 @@ let colors = import ../colors.nix; in
         );
       };
 
-      work = {
-        id = 1;
-        settings = defaultSettings // {
-          "browser.startup.homepage" = "about:blank";
-        };
-        userChrome = (builtins.concatStringsSep "" [''
-:root {
-  --uc-urlbar-bg-color: ${colors.primary.background};
-  --uc-show-new-tab-button: none;
-  --uc-show-tab-separators: none;
-  --uc-tab-separators-color: none;
-  --uc-tab-separators-width: none;
-  --uc-urlbar-selected-bg-color: ${colors.normal.red};
-}
-          ''
-          (builtins.readFile ./userChrome.css)]
-        );
-      };
+      # Will rather use multi-container than separate profiles
+      # work = {}
 
-      omni = {
-        id = 2;
-        settings = defaultSettings // {
-          "browser.startup.homepage" = "about:blank";
-        };
-        userChrome = (builtins.concatStringsSep "" [''
-:root {
-  --uc-urlbar-bg-color: ${colors.primary.background};
-  --uc-show-new-tab-button: none;
-  --uc-show-tab-separators: none;
-  --uc-tab-separators-color: none;
-  --uc-tab-separators-width: none;
-  --uc-urlbar-selected-bg-color: ${colors.bright.blue};
-}
-          ''
-          (builtins.readFile ./userChrome.css)]
-        );
-      };
     };
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       bitwarden
       vim-vixen
+      multi-account-containers
     ];
   };
 }
