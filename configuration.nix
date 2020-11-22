@@ -12,7 +12,7 @@ let
 in
 {
   imports =
-    [ 
+    [
       /etc/nixos/hardware-configuration.nix
       (import "${home-manager}/nixos")
     ];
@@ -94,7 +94,7 @@ in
 
   # Use capslock as Ctrl and Escape
   services.interception-tools.enable = true;
- 
+
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
@@ -105,6 +105,20 @@ in
   services.keybase.enable = true;
   services.kbfs.enable = true;
   virtualisation.docker.enable = true;
+
+  # Copy desired files from https://nordvpn.com/opvn
+  # to /root/nixos/openvpn
+  services.openvpn.servers =
+    if builtins.pathExists "/root/nixos/openvpn"
+    then
+      let
+        files = builtins.attrNames (builtins.readDir "/root/nixos/openvpn");
+        createSet = file: {
+          name = builtins.substring 0 5 file;# TODO: make better
+          value = { config = '' config /root/nixos/openvpn/${file} ''; };
+        };
+      in builtins.listToAttrs (builtins.map createSet files)
+    else builtins.trace "No openvpn files found" {};
 
   users.users.dghaehre = {
     isNormalUser = true;

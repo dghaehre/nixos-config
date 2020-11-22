@@ -29,6 +29,7 @@ let colors = import ../colors.nix; in
         "privacy.trackingprotection.socialtracking.enabled" = true;
         "privacy.trackingprotection.socialtracking.annotate.enabled" = true;
         "services.sync.declinedEngines" = "addons,passwords,prefs";
+        "extensions.allowPrivateBrowsingByDefault" = true;
         "services.sync.engine.addons" = false;
         "services.sync.engineStatusChanged.addons" = true;
         "services.sync.engine.passwords" = false;
