@@ -18,8 +18,10 @@
       "...." = "cd ../../../";
       "c" = "clear";
       "down" = "cd ~/Downloads";
-      # "git" = "TZ=UTC git";
-      "go" = "git checkout";
+      "cat" = "${pkgs.bat}/bin/bat";
+      "ls" = "${pkgs.exa}/bin/exa";
+      "l" = "${pkgs.exa}/bin/exa -l -g --git";
+      "gl" = "git checkout";
       "please" = "sudo !!";
       "cpwd" = "pwd | xsel -b";
       "dmenu" = "dmenu -b -nb '#2f343f' -sb '#2f343f'";
@@ -33,6 +35,12 @@
       "push-wikis" = "push-work && push-diary";
       "push-work" = "cd ~/wikis/work && pushall";
       "push-diary" ="cd ~/wikis/personal && keybase login -s dghaehre_ && pushall";
+
+      # todo.sh
+      "t" = "todo.sh -d ~/Dropbox/todotxt/nixos-config";
+      "today" ="t lsp B";
+      "work" = "t ls @work";
+      # TODO: add now()
 
     };
     initExtra = (builtins.readFile ./.zshrc);

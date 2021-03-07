@@ -49,7 +49,7 @@ let colors = import ./colors.nix; in
     aliases = {
       lg = "log --stat --decorate --graph";
       ca = "! git add . && git commit";
-      b = "branch -a --sort=committerdate";
+      b = "branch -a --sort=committerdate -v";
       ss = "stash show -p";
       sl = "stash list";
     };

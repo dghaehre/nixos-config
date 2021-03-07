@@ -52,6 +52,14 @@ command! SpellNb execute "set spell spelllang=nb"
 nnoremap <leader>x *``cgn
 vnoremap <leader>x y/\V<C-R>=escape(@",'/\')<CR><CR>Ncgn
 
+" Set current file as current dir
+nmap <Leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" write dts to insert date and time
+:iab <expr> dts strftime("%d/%m/%y %H:%M:%S")
+
+
+
 
 
 
@@ -87,7 +95,7 @@ highlight CursorLine cterm=NONE ctermbg=Black ctermfg=NONE guibg=NONE guifg=NONE
 
 " #################### Startify ########################
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'z': '~/.zshrc'}, {'s': '~/.ssh/config'}, {'g': '~/.gitconfig'} ]
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'z': '~/.zshrc'}, {'s': '~/.ssh/config'}, {'g': '~/.gitconfig'}, {'t': '~/Dropbox/todotxt/todo.txt'}, {'d': '~/Dropbox/todotxt/done.txt'} ]
 
 
 

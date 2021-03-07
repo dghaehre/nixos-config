@@ -20,6 +20,8 @@
 	vim-airline
 	vim-airline-themes
 	coc-nvim
+        coc-go
+        coc-rls
 	vim-tsx
 	vim-elixir
 	# vim-nnn Exists in unstable

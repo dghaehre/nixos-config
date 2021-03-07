@@ -197,14 +197,14 @@ mode "$firefox_launcher" {
 
 set $lock_launcher System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$lock_launcher" {
-    bindsym l exec --no-startup-id i3lock -c ${colors.primary.background}, mode "default"
-    bindsym e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-    bindsym s exec --no-startup-id "i3lock -c ${colors.primary.background} && systemctl suspend", mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+  bindsym l exec --no-startup-id i3lock -c ${colors.primary.background}, mode "default"
+  bindsym e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+  bindsym s exec --no-startup-id "i3lock -c ${colors.primary.background} && systemctl suspend", mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
     '';

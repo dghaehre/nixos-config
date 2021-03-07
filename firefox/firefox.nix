@@ -18,11 +18,11 @@ let colors = import ../colors.nix; in
         "browser.urlbar.placeholderName" = "DuckDuckGo";
         "browser.search.defaultenginename" = "DuckDuckGo";
         "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "DuckDuckGo";
+        "browser.backspace_action" = 0;
         "app.update.auto" = false;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "browser.startup.homepage" = "https://duckduckgo.com";
+        "browser.startup.homepage" = "about:home";
         "devtools.theme" = "dark";
-        "browser.in-content.dark-mode" = true;
         "browser.ctrlTab.recentlyUsedOrder" = false;
         "signon.rememberSignons" = false;
         "privacy.trackingprotection.enabled" = true;
@@ -39,9 +39,7 @@ let colors = import ../colors.nix; in
 
       dghaehre = {
 	id = 0;
-        settings = defaultSettings // {
-          "browser.startup.homepage" = "about:home";
-        };
+        settings = defaultSettings;
         userChrome = (builtins.concatStringsSep "" [''
 :root {
   --uc-urlbar-bg-color: ${colors.primary.background};
@@ -55,10 +53,6 @@ let colors = import ../colors.nix; in
           (builtins.readFile ./userChrome.css)]
         );
       };
-
-      # Will rather use multi-container than separate profiles
-      # work = {}
-
     };
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [

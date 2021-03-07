@@ -19,6 +19,10 @@ in
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "slack"
+    "dropbox"
+    "firefox-bin"
+    "firefox-release-bin"
+    "firefox-release-bin-unwrapped"
   ];
 
   # Use the GRUB 2 boot loader.
@@ -72,6 +76,7 @@ in
     docker
     docker-compose
     rustup
+    go
 
     # Utils
     nnn
@@ -79,6 +84,8 @@ in
     ripgrep
     rofi
     feh
+    todo-txt-cli
+
   ];
 
   networking.networkmanager.enable = true;
@@ -99,7 +106,24 @@ in
   services.xserver.libinput.enable = true;
 
   # Enable the Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+    greeters.gtk = {
+      enable = true;
+      theme = {
+        name = "Nordic";
+        package = pkgs.nordic;
+      };
+      cursorTheme = {
+        name = "Numix-cursor-theme";
+        package = pkgs.numix-cursor-theme;
+      };
+      iconTheme = {
+        name = "Numix-icon-heme";
+        package = pkgs.numix-icon-theme;
+      };
+    };
+  };
   services.xserver.windowManager.i3.enable = true;
 
   services.keybase.enable = true;
@@ -130,6 +154,28 @@ in
     imports = [
       ./home.nix
     ];
+  };
+
+  # Dropbox
+  # used for todo.txt
+  networking.firewall = {
+    allowedTCPPorts = [ 17500 ];
+    allowedUDPPorts = [ 17500 ];
+  };
+  systemd.user.services.dropbox = {
+    description = "Dropbox";
+    after = [ "xembedsniproxy.service" ];
+    wants = [ "xembedsniproxy.service" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
+      ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
   };
 
   system.stateVersion = "20.03";
