@@ -62,7 +62,7 @@ in
   environment.systemPackages = with pkgs; [
     # Core
     wget
-    vim
+    neovim
     tmux
     git
     alacritty
@@ -73,8 +73,6 @@ in
     keybase-gui
 
     # Programming
-    docker
-    docker-compose
     rustup
     go
 
@@ -85,13 +83,18 @@ in
     rofi
     feh
     todo-txt-cli
+    translate-shell
 
   ];
 
+  environment.variables = {
+    GOROOT = [ "${pkgs.go.out}/share/go" ];
+  };
+
   networking.networkmanager.enable = true;
 
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

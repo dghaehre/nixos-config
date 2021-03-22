@@ -4,6 +4,7 @@
 :set expandtab
 :set shiftwidth=2
 :set softtabstop=2
+:set tabstop=2
 :set autoindent
 :set smartindent
 
@@ -12,6 +13,10 @@ set linebreak
 set textwidth=0
 set wrapmargin=0
 " ^ word wrap
+
+" Store undoes
+set undodir=~/.vim/undo-dir
+set undofile
 
 set foldmethod=manual
 set foldlevel=0
@@ -59,6 +64,10 @@ nmap <Leader>cd :cd %:p:h<cr>:pwd<cr>
 :iab <expr> dts strftime("%d/%m/%y %H:%M:%S")
 
 
+" ################ Snippets #################
+""""""""""""""""""""""""""""""""""""""""""""
+abbr newp new Promise((resolve, reject) => {<CR><CR><esc>0i})<esc>0k
+abbr iferr if err != nil {<CR><CR>}<esc>kddko
 
 
 

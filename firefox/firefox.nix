@@ -37,7 +37,7 @@ let colors = import ../colors.nix; in
       };
       in {
 
-      dghaehre = {
+      default = {
 	id = 0;
         settings = defaultSettings;
         userChrome = (builtins.concatStringsSep "" [''
